@@ -810,7 +810,7 @@
     justify-content: center;
     box-shadow: 0 0 12px rgba(200,168,50,0.4);
     transition: background 0.2s, box-shadow 0.2s;
-  ">🔇</button>
+  ">�</button>
 
   <nav>
     <div class="nav-brand">
@@ -1168,17 +1168,28 @@
       }
     }
 
-    // Try autoplay on first user interaction
+    // Autoplay on first user interaction (browser policy requires it)
+    function tryAutoplay() {
+      audio.currentTime = 30;
+      audio.volume = 0.4;
+      audio.play().then(() => {
+        btn.textContent = '🔊';
+        playing = true;
+      }).catch(() => {});
+    }
+
+    // Try immediately (works if browser allows autoplay)
+    tryAutoplay();
+
+    // Fallback: try on first interaction
     document.addEventListener('click', function startOnce() {
-      if (!playing) {
-        audio.currentTime = 30;
-        audio.volume = 0.4;
-        audio.play().then(() => {
-          btn.textContent = '🔊';
-          playing = true;
-        }).catch(() => {});
-      }
+      if (!playing) { tryAutoplay(); }
       document.removeEventListener('click', startOnce);
+    }, { once: true });
+
+    document.addEventListener('keydown', function startOnce() {
+      if (!playing) { tryAutoplay(); }
+      document.removeEventListener('keydown', startOnce);
     }, { once: true });
 
     // ── Intersection Observer for fade-in ──────────────────
