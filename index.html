@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>גדוד דובי הגולן 9238</title>
+  <script>
+    (() => {
+      const param = new URLSearchParams(window.location.search).get("clawpilotTheme");
+      const theme = param || "dark";
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      --cp-bg: #f7f4ef;
+      --cp-bg-elevated: #fcfbf8;
+      --cp-surface: #ffffff;
+      --cp-surface-soft: #f5f5f5;
+      --cp-border: #dedede;
+      --cp-border-strong: #919191;
+      --cp-text: #242424;
+      --cp-text-muted: #5c5c5c;
+      --cp-text-soft: #6f6f6f;
+      --cp-accent: #b11f4b;
+      --cp-accent-hover: #9a1a41;
+      --cp-accent-soft: rgba(177,31,75,0.08);
+      --cp-accent-fg: #ffffff;
+      --cp-success: #16a34a;
+      --cp-danger: #dc2626;
+      --cp-warning: #f59e0b;
+      --cp-link: #0078d4;
+      --cp-shadow: 0 18px 48px rgba(0,0,0,0.12);
+      --cp-overlay: rgba(255,255,255,0.8);
+      --cp-panel: rgba(255,255,255,0.86);
+      --cp-panel-strong: rgba(255,255,255,0.96);
+      --cp-sheen: rgba(255,255,255,0.55);
+      --cp-highlight: rgba(177,31,75,0.12);
+    }
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --cp-bg: #3d3b3a;
+      --cp-bg-elevated: #343231;
+      --cp-surface: #292929;
+      --cp-surface-soft: #2e2e2e;
+      --cp-border: #474747;
+      --cp-border-strong: #5f5f5f;
+      --cp-text: #dedede;
+      --cp-text-muted: #919191;
+      --cp-text-soft: #b0b0b0;
+      --cp-accent: #fd8ea1;
+      --cp-accent-hover: #fb7b91;
+      --cp-accent-soft: rgba(253,142,161,0.14);
+      --cp-accent-fg: #1a1a1a;
+      --cp-success: #4ade80;
+      --cp-danger: #f87171;
+      --cp-warning: #fbbf24;
+      --cp-link: #4da6ff;
+      --cp-shadow: 0 18px 48px rgba(0,0,0,0.32);
+      --cp-overlay: rgba(41,41,41,0.88);
+      --cp-panel: rgba(41,41,41,0.72);
+      --cp-panel-strong: rgba(41,41,41,0.96);
+      --cp-sheen: rgba(255,255,255,0.04);
+      --cp-highlight: rgba(253,142,161,0.12);
+    }
+
+    /* ── Military Overrides ───────────────────────── */
+    :root, html[data-theme="dark"] {
+      --mil-bg:        #0d110a;
+      --mil-bg2:       #111a0c;
+      --mil-surface:   #192211;
+      --mil-border:    #2e4020;
+      --mil-green:     #4a7c2f;
+      --mil-green-lt:  #6fb84a;
+      --mil-gold:      #c8a832;
+      --mil-gold-lt:   #e8c84a;
+      --mil-text:      #d8e8c8;
+      --mil-text-muted:#8aaa72;
+      --mil-red:       #c03030;
+      --mil-shadow:    0 4px 24px rgba(0,0,0,0.7);
+      --mil-glow:      0 0 12px rgba(74,124,47,0.4);
+      --mil-glow-gold: 0 0 16px rgba(200,168,50,0.5);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--mil-bg);
+      color: var(--mil-text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      direction: rtl;
+    }
+
+    /* ── Scanline overlay ─────────────────── */
+    body::before {
+      content: "";
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0,0,0,0.06) 0px,
+        rgba(0,0,0,0.06) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+    }
+
+    /* ── Camo background texture  ─────────── */
+    body::after {
+      content: "";
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      opacity: 0.04;
+      background-image:
+        radial-gradient(ellipse 60px 40px at 10% 20%, #4a7c2f 0%, transparent 100%),
+        radial-gradient(ellipse 80px 60px at 35% 55%, #2e4020 0%, transparent 100%),
+        radial-gradient(ellipse 50px 70px at 70% 10%, #192211 0%, transparent 100%),
+        radial-gradient(ellipse 90px 45px at 85% 75%, #4a7c2f 0%, transparent 100%),
+        radial-gradient(ellipse 40px 80px at 55% 90%, #2e4020 0%, transparent 100%);
+      background-size: 300px 300px;
+    }
+
+    /* ══════════════════════════════════════════
+       NAV
+    ══════════════════════════════════════════ */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13,17,10,0.96);
+      border-bottom: 2px solid var(--mil-border);
+      backdrop-filter: blur(8px);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--mil-gold);
+      text-shadow: var(--mil-glow-gold);
+      text-transform: uppercase;
+    }
+
+    .nav-brand .star { font-size: 1.1rem; }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--mil-text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s, text-shadow 0.2s;
+    }
+    .nav-links a:hover {
+      color: var(--mil-green-lt);
+      text-shadow: var(--mil-glow);
+    }
+
+    .nav-badge {
+      background: var(--mil-red);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 2px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ══════════════════════════════════════════
+       HERO
+    ══════════════════════════════════════════ */
+    .hero {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 2rem;
+      overflow: hidden;
+    }
+
+    /* animated bg gradient */
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 40%, rgba(74,124,47,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 80% at 70% 80%, rgba(200,168,50,0.06) 0%, transparent 70%);
+      animation: heroShift 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes heroShift {
+      from { transform: scale(1) translateY(0); }
+      to   { transform: scale(1.06) translateY(-20px); }
+    }
+
+    /* ── Emblem ─────────────────────────────── */
+    .emblem {
+      position: relative;
+      width: 320px;
+      height: 320px;
+      margin-bottom: 2.5rem;
+      filter: drop-shadow(0 0 32px rgba(74,124,47,0.55));
+      animation: emblemFloat 5s ease-in-out infinite;
+    }
+
+    .emblem img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+    }
+
+    @keyframes emblemFloat {
+      0%,100% { transform: translateY(0px);   }
+      50%      { transform: translateY(-12px); }
+    }
+
+    .emblem svg { width: 100%; height: 100%; }
+
+    /* ── Unit number strip ──────────────────── */
+    .unit-strip {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .unit-line {
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--mil-gold), transparent);
+    }
+
+    .unit-number {
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.35em;
+      color: var(--mil-gold);
+      text-transform: uppercase;
+    }
+
+    /* ── Hero title ─────────────────────────── */
+    .hero-title {
+      font-size: clamp(2.8rem, 8vw, 5.5rem);
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      line-height: 1.05;
+      color: var(--mil-gold-lt);
+      text-shadow: var(--mil-glow-gold), 0 2px 8px rgba(0,0,0,0.8);
+      margin-bottom: 0.4rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.1rem, 3vw, 1.6rem);
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mil-green-lt);
+      text-shadow: var(--mil-glow);
+      margin-bottom: 2.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Motto band ─────────────────────────── */
+    .motto-band {
+      background: linear-gradient(135deg, rgba(74,124,47,0.2), rgba(200,168,50,0.1));
+      border: 1px solid var(--mil-gold);
+      border-radius: 4px;
+      padding: 0.8rem 2.5rem;
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--mil-gold-lt);
+      text-shadow: var(--mil-glow-gold);
+      position: relative;
+      z-index: 1;
+      margin-bottom: 3rem;
+    }
+
+    .motto-band::before,
+    .motto-band::after {
+      content: "◆";
+      margin: 0 0.6rem;
+      color: var(--mil-green);
+      font-size: 0.7em;
+    }
+
+    /* ── Hero stats ─────────────────────────── */
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      position: relative;
+      z-index: 1;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--mil-gold);
+      text-shadow: var(--mil-glow-gold);
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .stat-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--mil-text-muted);
+      margin-top: 4px;
+    }
+
+    /* ── Scroll arrow ───────────────────────── */
+    .scroll-arrow {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--mil-green-lt);
+      font-size: 1.5rem;
+      animation: arrowBounce 1.5s ease-in-out infinite;
+      cursor: pointer;
+      z-index: 1;
+    }
+    @keyframes arrowBounce {
+      0%,100% { transform: translateX(-50%) translateY(0);    opacity: 1; }
+      50%      { transform: translateX(-50%) translateY(10px); opacity: 0.5; }
+    }
+
+    /* ══════════════════════════════════════════
+       SECTION SHARED
+    ══════════════════════════════════════════ */
+    section {
+      position: relative;
+      z-index: 1;
+      padding: 6rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-divider {
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--mil-border), var(--mil-green), var(--mil-border), transparent);
+      margin-bottom: 3.5rem;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-tag {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--mil-green-lt);
+      background: rgba(74,124,47,0.15);
+      border: 1px solid var(--mil-border);
+      padding: 4px 12px;
+      border-radius: 2px;
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 4vw, 2.6rem);
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      color: var(--mil-gold-lt);
+      text-shadow: var(--mil-glow-gold);
+    }
+
+    /* ══════════════════════════════════════════
+       MISSION SECTION
+    ══════════════════════════════════════════ */
+    .mission-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 700px) {
+      .mission-grid { grid-template-columns: 1fr; }
+    }
+
+    .mission-card {
+      background: var(--mil-surface);
+      border: 1px solid var(--mil-border);
+      border-radius: 0.625rem;
+      padding: 2rem;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    }
+
+    .mission-card:hover {
+      border-color: var(--mil-green);
+      box-shadow: var(--mil-glow);
+      transform: translateY(-4px);
+    }
+
+    .mission-card.featured {
+      grid-column: 1 / -1;
+      border-color: var(--mil-gold);
+      background: linear-gradient(135deg, var(--mil-surface), rgba(200,168,50,0.05));
+    }
+
+    .mission-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .mission-card-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mil-gold);
+      margin-bottom: 0.6rem;
+    }
+
+    .mission-card-text {
+      font-size: 0.95rem;
+      color: var(--mil-text-muted);
+      line-height: 1.7;
+    }
+
+    /* ══════════════════════════════════════════
+       VALUES
+    ══════════════════════════════════════════ */
+    .values-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .value-item {
+      background: var(--mil-surface);
+      border: 1px solid var(--mil-border);
+      border-right: 4px solid var(--mil-green);
+      border-radius: 0.625rem;
+      padding: 1.5rem 1.2rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      transition: border-right-color 0.3s, box-shadow 0.3s;
+    }
+
+    .value-item:hover {
+      border-right-color: var(--mil-gold);
+      box-shadow: var(--mil-glow-gold);
+    }
+
+    .value-icon {
+      font-size: 1.6rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .value-name {
+      font-size: 0.95rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--mil-green-lt);
+      margin-bottom: 4px;
+    }
+
+    .value-desc {
+      font-size: 0.82rem;
+      color: var(--mil-text-muted);
+      line-height: 1.5;
+    }
+
+    /* ══════════════════════════════════════════
+       HERITAGE / TIMELINE
+    ══════════════════════════════════════════ */
+    .timeline {
+      position: relative;
+      padding-right: 2rem;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--mil-green), var(--mil-gold), var(--mil-green));
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-right: 2rem;
+      padding-bottom: 2.5rem;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      right: -7px;
+      top: 6px;
+      width: 14px;
+      height: 14px;
+      background: var(--mil-gold);
+      border: 2px solid var(--mil-bg);
+      border-radius: 50%;
+      box-shadow: var(--mil-glow-gold);
+    }
+
+    .timeline-year {
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mil-gold);
+      margin-bottom: 4px;
+    }
+
+    .timeline-event {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--mil-text);
+      margin-bottom: 4px;
+    }
+
+    .timeline-detail {
+      font-size: 0.83rem;
+      color: var(--mil-text-muted);
+      line-height: 1.55;
+    }
+
+    /* ══════════════════════════════════════════
+       TERRAIN SECTION
+    ══════════════════════════════════════════ */
+    .terrain-banner {
+      background: linear-gradient(135deg, var(--mil-surface), rgba(74,124,47,0.08));
+      border: 1px solid var(--mil-border);
+      border-radius: 16px;
+      padding: 3rem 2.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .terrain-banner::before {
+      content: "9238";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 12rem;
+      font-weight: 900;
+      color: rgba(74,124,47,0.06);
+      letter-spacing: 0.1em;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .terrain-title {
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mil-gold-lt);
+      margin-bottom: 1rem;
+    }
+
+    .terrain-desc {
+      font-size: 0.95rem;
+      color: var(--mil-text-muted);
+      max-width: 640px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    .terrain-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
+
+    .terrain-tag {
+      background: rgba(74,124,47,0.15);
+      border: 1px solid var(--mil-green);
+      color: var(--mil-green-lt);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 2px;
+    }
+
+    /* ══════════════════════════════════════════
+       CONTACT / FOOTER
+    ══════════════════════════════════════════ */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .contact-card {
+      background: var(--mil-surface);
+      border: 1px solid var(--mil-border);
+      border-radius: 0.625rem;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .contact-card-icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
+
+    .contact-card-label {
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mil-text-muted);
+      margin-bottom: 4px;
+    }
+
+    .contact-card-value {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--mil-gold-lt);
+    }
+
+    footer {
+      position: relative;
+      z-index: 1;
+      background: rgba(0,0,0,0.5);
+      border-top: 2px solid var(--mil-border);
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-size: 1rem;
+      font-weight: 900;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--mil-gold);
+      text-shadow: var(--mil-glow-gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-text {
+      font-size: 0.75rem;
+      color: var(--mil-text-muted);
+      letter-spacing: 0.06em;
+    }
+
+    .footer-stars {
+      color: var(--mil-green-lt);
+      letter-spacing: 0.4em;
+      font-size: 0.8rem;
+      margin: 0.6rem 0;
+    }
+
+    /* ══════════════════════════════════════════
+       UTILITIES / ANIMATIONS
+    ══════════════════════════════════════════ */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Blinking cursor effect */
+    .blink {
+      animation: blink 1.2s step-end infinite;
+    }
+    @keyframes blink {
+      0%,100% { opacity: 1; }
+      50%      { opacity: 0; }
+    }
+
+    /* ── Counter animation ── */
+    @keyframes countUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0);   }
+    }
+
+    /* ── Section full-width backgrounds ── */
+    .bg-strip {
+      background: linear-gradient(180deg, transparent, rgba(74,124,47,0.04), transparent);
+      padding: 0;
+    }
+
+    hr.mil-divider {
+      border: none;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--mil-border), transparent);
+      margin: 0;
+    }
+
+    /* ── Classified Fun Fact pill ── */
+    .fun-fact {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      background: rgba(200,168,50,0.07);
+      border: 1px dashed var(--mil-gold);
+      border-radius: 0.625rem;
+      padding: 0.9rem 1.1rem;
+      margin-top: 1.4rem;
+      position: relative;
+      font-size: 0.82rem;
+      color: var(--mil-text-muted);
+      line-height: 1.55;
+    }
+    .fun-fact::before {
+      content: "⬛ סודי";
+      position: absolute;
+      top: -10px;
+      right: 12px;
+      background: var(--mil-bg2);
+      color: var(--mil-gold);
+      font-size: 0.6rem;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      padding: 1px 7px;
+      border: 1px solid var(--mil-gold);
+      border-radius: 2px;
+    }
+    .fun-fact-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 1px; }
+    .fun-fact strong { color: var(--mil-gold-lt); }
+
+    /* ── Mobile nav ── */
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ NAV ══════════════════════════════════ -->
+  <nav>
+    <div class="nav-brand">
+      <span class="star">★</span>
+      גדוד 9238
+      <span class="star">★</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#mission">משימה</a></li>
+      <li><a href="#values">ערכים</a></li>
+      <li><a href="#heritage">מורשת</a></li>
+      <li><a href="#terrain">שטח</a></li>
+      <li><a href="#contact">קשר</a></li>
+    </ul>
+    <span class="nav-badge">סוד</span>
+  </nav>
+
+  <!-- ══ HERO ══════════════════════════════════ -->
+  <div class="hero">
+
+    <!-- Emblem Logo -->
+    <div class="emblem">
+      <img src="logo.png" alt="סמל גדוד דובי הגולן 9238" style="width:100%;height:100%;object-fit:contain;" />
+    </div>
+
+    <!-- Unit strip -->
+    <div class="unit-strip">
+      <div class="unit-line"></div>
+      <div class="unit-number">יחידה מספר ✦ 9238 ✦</div>
+      <div class="unit-line"></div>
+    </div>
+
+    <h1 class="hero-title">דובי הגולן</h1>
+    <p class="hero-subtitle">גדוד 9238 — צבא הגנה לישראל</p>
+
+    <div class="motto-band">
+      דובי האש כוסיות אש מגיל שש
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-value" data-count="9238">9238</div>
+        <div class="stat-label">מספר הגדוד</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">גולן</div>
+        <div class="stat-label">אזור פריסה</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">24/7</div>
+        <div class="stat-label">כוננות מבצעית</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">100%</div>
+        <div class="stat-label">מחויבות</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">13</div>
+        <div class="stat-label">פרות שנוצחו</div>
+      </div>
+    </div>
+
+    <div class="scroll-arrow" onclick="document.getElementById('mission').scrollIntoView()">▼</div>
+  </div>
+
+  <hr class="mil-divider">
+
+  <!-- ══ MISSION ══════════════════════════════ -->
+  <section id="mission">
+    <div class="section-divider"></div>
+    <div class="section-header fade-in">
+      <div class="section-tag">// MISSION //</div>
+      <h2 class="section-title">המשימה שלנו</h2>
+    </div>
+
+    <div class="mission-grid">
+      <div class="mission-card featured fade-in">
+        <span class="mission-icon">🛡️</span>
+        <div class="mission-card-title">הגנת הגבול הצפוני</div>
+        <p class="mission-card-text">
+          גדוד דובי הגולן 9238 אחראי על אבטחה ויצירת הרתעה מרביסת לאורך קו הגבול בהר הגולן.
+          הגדוד מוכן לתגובה מהירה בכל שעה ובכל מזג אוויר — ביום ובלילה, בקיץ ובחורף.
+          החיילים שלנו עומדים על המשמר כדי להבטיח את ביטחון מדינת ישראל.
+        </p>
+        <div class="fun-fact">
+          <span class="fun-fact-icon">🐄</span>
+          <span><strong>עובדה מסווגת:</strong> גדוד 9238 ניצח עד כה כ-<strong>13 פרות</strong> בקרב ידיים — 11 ניצחונות מוחלטים ו-2 תיקו שנוי במחלוקת. הפרות מגדר הסמוך עדיין מסרבות להכיר בתוצאות.</span>
+        </div>
+      </div>
+
+      <div class="mission-card fade-in">
+        <span class="mission-icon">🔭</span>
+        <div class="mission-card-title">סיור ומעקב</div>
+        <p class="mission-card-text">
+          ניטור רציף ואינטנסיבי של השטח באמצעות יכולות איסוף מודיעין מתקדמות ויחידות סיור שטח מיומנות.
+        </p>
+        <div class="fun-fact">
+          <span class="fun-fact-icon">👁️</span>
+          <span><strong>נתון מבצעי:</strong> בסיור אחד של הגדוד זוהו <strong>3 שועלים חשודים</strong>, עגלה נוטה שמאלה ועז שנראתה "מסתכלת יותר מדי". כולם שוחררו ללא תנאים.</span>
+        </div>
+      </div>
+
+      <div class="mission-card fade-in">
+        <span class="mission-icon">⚡</span>
+        <div class="mission-card-title">כוח תגובה מהיר</div>
+        <p class="mission-card-text">
+          יחידה בכוננות מלאה לתגובה מיידית לכל איום בשטח — כולל פריצת גבול, פעולות חבלה וחירום ביטחוני.
+        </p>
+        <div class="fun-fact">
+          <span class="fun-fact-icon">⚡</span>
+          <span><strong>שיא הגדוד:</strong> זמן התגובה הממוצע לאזעקה עומד על <strong>4.3 דקות</strong> — מתוכן 3.1 דקות מוקדשות לחיפוש הנעל השנייה.</span>
+        </div>
+      </div>
+
+      <div class="mission-card fade-in">
+        <span class="mission-icon">🤝</span>
+        <div class="mission-card-title">שיתוף פעולה בין-זרועי</div>
+        <p class="mission-card-text">
+          פעילות מתואמת עם יחידות צנחנים, שריון, תותחנים וחיל האוויר לביצוע מבצעים מורכבים בסביבה הגולנית.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="mil-divider">
+
+  <!-- ══ VALUES ══════════════════════════════ -->
+  <section id="values" class="bg-strip">
+    <div class="section-divider"></div>
+    <div class="section-header fade-in">
+      <div class="section-tag">// VALUES //</div>
+      <h2 class="section-title">ערכי הגדוד</h2>
+    </div>
+
+    <div class="values-list">
+      <div class="value-item fade-in">
+        <span class="value-icon">⚔️</span>
+        <div>
+          <div class="value-name">לוחמנות</div>
+          <div class="value-desc">רוח לחימה גבוהה, אומץ לב, ומוכנות להקרבה למען המשימה. <br><small style="color:var(--mil-gold);opacity:0.7">⬛ סוללה ג מובילת ה-BMI של צה"ל שנה שלישית ברצף.</small></div>
+        </div>
+      </div>
+
+      <div class="value-item fade-in">
+        <span class="value-icon">🦁</span>
+        <div>
+          <div class="value-name">אחווה</div>
+          <div class="value-desc">חבר לא עוזב חבר. כלל הגדוד הוא משפחה אחת שנלחמת יחד.</div>
+        </div>
+      </div>
+
+      <div class="value-item fade-in">
+        <span class="value-icon">🎯</span>
+        <div>
+          <div class="value-name">מקצועיות</div>
+          <div class="value-desc">הכשרה אינטנסיבית ושמירה על סטנדרטים גבוהים בכל משימה. <br><small style="color:var(--mil-gold);opacity:0.7">⬛ 87% מהחיילים בטוחים שהמפקד לא יודע את שמם הפרטי.</small></div>
+        </div>
+      </div>
+
+      <div class="value-item fade-in">
+        <span class="value-icon">🏔️</span>
+        <div>
+          <div class="value-name">חוסן</div>
+          <div class="value-desc">עמידות פיזית ונפשית בפני תנאים קשים בשטח ומצבי לחץ. <br><small style="color:var(--mil-gold);opacity:0.7">⬛ ממוצע שעות שינה בגדוד: 2.5 שעות. הנתון לא כולל שמירות.</small></div>
+        </div>
+      </div>
+
+      <div class="value-item fade-in">
+        <span class="value-icon">🌟</span>
+        <div>
+          <div class="value-name">יוזמה</div>
+          <div class="value-desc">לפעול באומץ גם ממקום של אי-ודאות. מפקד קטן פועל עצמאית.</div>
+        </div>
+      </div>
+
+      <div class="value-item fade-in">
+        <span class="value-icon">🛡️</span>
+        <div>
+          <div class="value-name">אמינות</div>
+          <div class="value-desc">על כל חייל בגדוד לדעת שהוא יכול לסמוך על חברו — תמיד.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="mil-divider">
+
+  <!-- ══ HERITAGE ══════════════════════════════ -->
+  <section id="heritage">
+    <div class="section-divider"></div>
+    <div class="section-header fade-in">
+      <div class="section-tag">// HERITAGE //</div>
+      <h2 class="section-title">מורשת הקרב</h2>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item fade-in">
+        <div class="timeline-year">מלחמת יום כיפור — 1973</div>
+        <div class="timeline-event">קרב עמק הבכא — הגולן</div>
+        <div class="timeline-detail">
+          בקרבות רמת הגולן עמדו כוחות ישראליים קטנים מול עשרות אלפי חיילים סורים.
+          גבורת החיילים שעצרו את ההתקפה מסומלת בחלל הגדוד עד היום.
+        </div>
+      </div>
+
+      <div class="timeline-item fade-in">
+        <div class="timeline-year">שנות ה-80 — גישור ושמירה</div>
+        <div class="timeline-event">הקמת קו ההגנה המשולב</div>
+        <div class="timeline-detail">
+          בנייה ושכלול מערכות ההגנה בגולן, הכשרת יחידות אחזקה ולוגיסטיקה לפי לקחי המלחמה.
+        </div>
+      </div>
+
+      <div class="timeline-item fade-in">
+        <div class="timeline-year">2006 — מלחמת לבנון השנייה</div>
+        <div class="timeline-event">תגבור החזית הצפונית</div>
+        <div class="timeline-detail">
+          הגדוד הוצב כגיבוי אסטרטגי בצפון המדינה וסייע בתיאום מבצעי עם כוחות אחרים בחזית.
+        </div>
+      </div>
+
+      <div class="timeline-item fade-in">
+        <div class="timeline-year">היום</div>
+        <div class="timeline-event">שמירה על הגבול בעידן המודרני</div>
+        <div class="timeline-detail">
+          גדוד 9238 ממשיך את מסורת הגבורה, מצויד בטכנולוגיות חדישות ועם יחידות מיומנות לאתגרי הסביבה המשתנה.
+        </div>
+      </div>
+
+      <div class="timeline-item fade-in">
+        <div class="timeline-year">2022 — מעמיק מסווג</div>
+        <div class="timeline-event">"החופשות הקצרות" — פרק נשכח</div>
+        <div class="timeline-detail">
+          מפקד הגדוד הבטיח "חופשות קצרות" לאחר תרגיל הגדודי. החופשות ממשיכות להיות "בדרך". אנחנו ממתינים באמונה.
+        </div>
+      </div>
+
+      <div class="timeline-item fade-in">
+        <div class="timeline-year">2024 — תעלומה לא פתורה</div>
+        <div class="timeline-event">היעלמות הפינצטות</div>
+        <div class="timeline-detail">
+          כל הפינצטות בחדר הרפואה נעלמו בגל אחד. חקירה פנימית נפתחה ונסגרה. החשוד הראשי: חייל בשם ולא ידוע שמו.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="mil-divider">
+
+  <!-- ══ TERRAIN ══════════════════════════════ -->
+  <section id="terrain">
+    <div class="section-divider"></div>
+    <div class="section-header fade-in">
+      <div class="section-tag">// AO //</div>
+      <h2 class="section-title">אזור מבצע — הגולן</h2>
+    </div>
+
+    <div class="terrain-banner fade-in">
+      <div class="terrain-title">רמת הגולן — השטח שאנחנו מגנים עליו</div>
+      <p class="terrain-desc">
+        רמת הגולן היא שטח אסטרטגי ייחודי — גבולות טופוגרפיים מורכבים,
+        גבעות בזלת, נחלים ובקעות עמוקות. הגדוד מאומן לפעול בכל תנאי שטח ומזג אוויר
+        האופייניים לאזור — מחורף שלגוני ועד קיץ לוהט.
+      </p>
+      <div class="terrain-tags">
+        <span class="terrain-tag">בזלת</span>
+        <span class="terrain-tag">קרקע פתוחה</span>
+        <span class="terrain-tag">שלג חורפי</span>
+        <span class="terrain-tag">ערוצי נחל</span>
+        <span class="terrain-tag">תצפיות</span>
+        <span class="terrain-tag">מוצבים</span>
+        <span class="terrain-tag">גבול סוריה</span>
+        <span class="terrain-tag">גבול לבנון</span>
+        <span class="terrain-tag">4 עזים חשודות</span>
+        <span class="terrain-tag">חומוס טקטי</span>
+        <span class="terrain-tag">שיא: 13 פרות</span>
+      </div>
+      <div class="fun-fact" style="text-align:right;margin-top:1.5rem">
+        <span class="fun-fact-icon">📍</span>
+        <span><strong>עובדה גאוגרפית:</strong> אחד החיילים ניסה לדרג את המכ"ם על Google Maps. זה יצא <strong>2 כוכבים</strong> — "האוכל היה נסבל אבל ה-WiFi גרוע". הביקורת הוסרה על ידי הצנזורה הצבאית תוך 4 דקות.</span>
+      </div>
+  </section>
+
+  <hr class="mil-divider">
+
+  <!-- ══ CONTACT ══════════════════════════════ -->
+  <section id="contact">
+    <div class="section-divider"></div>
+    <div class="section-header fade-in">
+      <div class="section-tag">// CONTACT //</div>
+      <h2 class="section-title">מוצב פיקוד</h2>
+    </div>
+
+    <div class="contact-grid fade-in">
+      <div class="contact-card">
+        <div class="contact-card-icon">📍</div>
+        <div class="contact-card-label">מיקום</div>
+        <div class="contact-card-value">רמת הגולן, ישראל</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card-icon">🏛️</div>
+        <div class="contact-card-label">פיקוד</div>
+        <div class="contact-card-value">פיקוד הצפון — צה"ל</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card-icon">🔐</div>
+        <div class="contact-card-label">רמת סיווג</div>
+        <div class="contact-card-value">סודי — מוגבל</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card-icon">📡</div>
+        <div class="contact-card-label">תדר קשר</div>
+        <div class="contact-card-value">מוצפן — רשת צבאית</div>
+      </div>
+    </div>
+
+    <div class="terrain-banner fade-in" style="margin-top:1rem;">
+      <div class="terrain-title">⚠ אזהרת אבטחה</div>
+      <p class="terrain-desc" style="color:var(--mil-text-muted);font-size:0.85rem;">
+        האתר הזה מכיל מידע לשימוש פנימי בגדוד בלבד.
+        כל מידע מסווג אינו מופיע כאן. פרסום מידע ממקורות זה ו/או הפצתו
+        ללא אישור מפקד הגדוד מהווה עבירה על חוק עונשין צבאי.
+      </p>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ══════════════════════════════ -->
+  <footer>
+    <div class="footer-logo">★ גדוד דובי הגולן 9238 ★</div>
+    <div class="footer-stars">★ ★ ★ ★ ★</div>
+    <div class="footer-text">
+      צבא הגנה לישראל &nbsp;|&nbsp; פיקוד הצפון &nbsp;|&nbsp;
+      כל הזכויות שמורות <span class="blink">|</span>
+    </div>
+    <div class="footer-text" style="margin-top:0.4rem;opacity:0.5;font-size:0.65rem;letter-spacing:0.15em;">
+      CLASSIFIED // FOR AUTHORIZED PERSONNEL ONLY // BATTALION 9238
+    </div>
+  </footer>
+
+  <script>
+    // ── Intersection Observer for fade-in ──────────────────
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e, i) => {
+          if (e.isIntersecting) {
+            setTimeout(() => e.target.classList.add("visible"), i * 80);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+    document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
