@@ -785,7 +785,32 @@
 </head>
 <body>
 
-  <!-- ══ NAV ══════════════════════════════════ -->
+  <!-- ══ BACKGROUND MUSIC ══════════════════════ -->
+  <audio id="bgMusic" loop>
+    <source src="%D7%A9%D7%A8%D7%99%D7%AA%20%D7%97%D7%93%D7%93%20-%20Mamma%20Mia%20(Prod%20by%20Asi%20Tal).mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Music toggle button -->
+  <button id="musicBtn" onclick="toggleMusic()" title="הפעל/השתק מוזיקה" style="
+    position: fixed;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    z-index: 9998;
+    background: rgba(13,17,10,0.92);
+    border: 2px solid var(--mil-gold);
+    color: var(--mil-gold);
+    font-size: 1.3rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 12px rgba(200,168,50,0.4);
+    transition: background 0.2s, box-shadow 0.2s;
+  ">🔇</button>
+
   <nav>
     <div class="nav-brand">
       <span class="star">★</span>
@@ -1125,6 +1150,35 @@
   </footer>
 
   <script>
+    // ── Background music autoplay ──────────────────
+    const audio = document.getElementById('bgMusic');
+    const btn   = document.getElementById('musicBtn');
+    let playing = false;
+
+    function toggleMusic() {
+      if (playing) {
+        audio.pause();
+        btn.textContent = '🔇';
+        playing = false;
+      } else {
+        audio.play();
+        btn.textContent = '🔊';
+        playing = true;
+      }
+    }
+
+    // Try autoplay on first user interaction
+    document.addEventListener('click', function startOnce() {
+      if (!playing) {
+        audio.volume = 0.4;
+        audio.play().then(() => {
+          btn.textContent = '🔊';
+          playing = true;
+        }).catch(() => {});
+      }
+      document.removeEventListener('click', startOnce);
+    }, { once: true });
+
     // ── Intersection Observer for fade-in ──────────────────
     const observer = new IntersectionObserver(
       (entries) => {
