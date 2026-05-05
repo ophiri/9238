@@ -1170,6 +1170,7 @@
     // Try autoplay on first user interaction
     document.addEventListener('click', function startOnce() {
       if (!playing) {
+        audio.currentTime = 30;
         audio.volume = 0.4;
         audio.play().then(() => {
           btn.textContent = '🔊';
